@@ -5,21 +5,32 @@
 <title>web programming course</title>
 <link rel="stylesheet" type="text/css" href="puppies.css">
 
+
 <?php
 
+
+
+	/***********************
+	**** SAVE TO DB ********
+	***********************/
+	
+	// ? was everything okay
+	 
+	
+
 	//check if there is variable in the URL
-	if (isset ($_GET ["message"])) {
+	if (isset ($_GET ["image1"])) {
 		
 		//only if there is message in the URL
 		//echo "there is message";
 		
 		//if its empty
-		if (empty($_GET ["message"])){
+		if (empty($_GET ["image1"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 1! ";
 		}else{
 			//its not empty
-			echo "Message: ".$_GET["message"]."<br>";
+			echo "image1: ".$_GET["image1"]."<br>";
 		}
 		
 	}else{
@@ -27,36 +38,36 @@
 	}
 	
 	//check if there is variable in the URL
-	if (isset ($_GET ["to"])) {
+	if (isset ($_GET ["image2"])) {
 		
 		//only if there is message in the URL
 		//echo "there is message";
 		
 		//if its empty
-		if (empty($_GET ["to"])){
+		if (empty($_GET ["image2"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 2! ";
 		}else{
 			//its not empty
-			echo "to: ".$_GET["to"]."<br>";
+			echo "image2: ".$_GET["image2"]."<br>";
 		}
 		
 	}else{
 		//echo "there is no such thing as message";
 	}
 		//check if there is variable in the URL
-	if (isset ($_GET ["from"])) {
+	if (isset ($_GET ["image3"])) {
 		
 		//only if there is message in the URL
 		//echo "there is message";
 		
 		//if its empty
-		if (empty($_GET ["from"])){
+		if (empty($_GET ["image3"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 3 ";
 		}else{
 			//its not empty
-			echo "from: ".$_GET["from"]."<br>";
+			echo "image3: ".$_GET["image3"]."<br>";
 		}
 		
 	}else{
@@ -64,18 +75,18 @@
 	//echo "there is no such thing as message";
 	}
 		//check if there is variable in the URL
-	if (isset ($_GET ["asi"])) {
+	if (isset ($_GET ["image4"])) {
 		
 		//only if there is message in the URL
 		//echo "there is message";
 		
 		//if its empty
-		if (empty($_GET ["asi"])){
+		if (empty($_GET ["image4"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 4 ";
 		}else{
 			//its not empty
-			echo "asi: ".$_GET["asi"]."<br>";
+			echo "image4: ".$_GET["image4"]."<br>";
 		}
 		
 	}else{
@@ -89,11 +100,49 @@
 	//$from = $_GET ["from"];
 	
 	//echo "My message is ".$my_message." and is to ".$to. " and is from " .$from;
+	
+	if($everything_was_okay == true){
+		
+		echo "Saving to database ... ";
+		
+		
+		//connection with username and password
+		//access username from config
+		//echo $db_username;
+		
+		// 1 servername
+		// 2 username
+		// 3 password
+		// 4 database
+		$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_tonyhaav");
+		
+		$stmt = $mysql->prepare("INSERT INTO puppy_table (image1, image2, image3, image4) VALUES (?,?,?,?)");
+			
+		//echo error
+		echo $mysql->error;
+		
+		// we are replacing question marks with values
+		// s - string, date or smth that is based on characters and numbers
+		// i - integer, number
+		// d - decimal, float
+		
+		//for each question mark its type with one letter
+		$stmt->bind_param("ssss", $_GET["image1"], $_GET["image2"], $_GET["image3"], $_GET["image4"]);
+		
+		//save
+		if($stmt->execute()){
+			echo "saved sucessfully";
+		}else{
+			echo $stmt->error;
+		}
+		
+		
+	}
 
 	
 	
 ?>
-
+<a href="table.php">table</a>
 <h2> PUPPY CALCULATOR </h2>
 
 		<IMG SRC="https://uberfacts.files.wordpress.com/2012/12/puppies-9.jpg" ALT="image one" WIDTH=250 HEIGHT=250" STYLE="position:relative; TOP:40px; LEFT:360px;">
@@ -116,18 +165,18 @@
 
 <form method="get">
 
-	<label for="from">IMAGE 1:* <label>
-	<input type="text" name="from"<br><br>
+	<label for="image1">IMAGE 1:* <label>
+	<input type="text" name="image1"><br>
 
-	<label for="to">IMAGE 2:* <label>
-	<input type="text" name="to"<br><br>
+	<label for="image2">IMAGE 2:* <label>
+	<input type="text" name="image2"><br>
 
 	
-	<label for="message">IMAGE 3:* <label>
-	<input type="text" name="message"<br><br>
+	<label for="image3">IMAGE 3:* <label>
+	<input type="text" name="image3"><br>
 
-	<label for="asi">IMAGE 4:* <label>
-	<input type="text" name="asi"<br><br>
+	<label for="image4">IMAGE 4:* <label>
+	<input type="text" name="image4"><br>
 	
 		
 	<!-- This is the save buttn-->
