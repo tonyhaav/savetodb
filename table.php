@@ -41,7 +41,7 @@
 	
 	
 	//SQL sentence
-	$stmt = $mysql->prepare("SELECT image1,image2,image3,image4 FROM puppy_table WHERE deleted IS NULL ORDER BY created DESC LIMIT 10");
+	$stmt = $mysql->prepare("SELECT id,image1,image2,image3,image4 FROM puppy_table WHERE deleted IS NULL ORDER BY created DESC LIMIT 10");
 	
 	//WHERE deleted IS NULL show only those that are not deleted
 	
@@ -49,7 +49,7 @@
 	echo $mysql->error;
 	
 	//variables for data for each row we will get
-	$stmt->bind_result($image1, $image2, $image3, $image4);
+	$stmt->bind_result($id,$image1, $image2, $image3, $image4);
 	
 	//query
 	$stmt->execute();
@@ -76,12 +76,12 @@
 		//echo $id." ".$message."<br>";
 		$table_html .= "<tr>"; //start new row
 			$table_html .= "<td>".$image1."</td>"; //add columns
-			$table_html .= "<td>".$iamge2."</td>";
+			$table_html .= "<td>".$image2."</td>";
 			$table_html .= "<td>".$image3."</td>";
 			$table_html .= "<td>".$image4."</td>";
 			$table_html .= "<td>
 			<a class='btn btn-danger'
-						href='?delete=".$id."'>X</a>
+						href='?delete=".$id."'>NOW</a>
 							</td>";
 			
 		$table_html .= "</tr>"; //end row

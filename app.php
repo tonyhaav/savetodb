@@ -5,7 +5,7 @@
 <title>web programming course</title>
 <link rel="stylesheet" type="text/css" href="puppies.css">
 
-
+<?php require_once("config.php"); ?>
 <?php
 
 
@@ -15,7 +15,7 @@
 	***********************/
 	
 	// ? was everything okay
-	 
+	 $everything_was_okay = true;
 	
 
 	//check if there is variable in the URL
@@ -28,6 +28,7 @@
 		if (empty($_GET ["image1"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 1! ";
+			$everything_was_okay = false;
 		}else{
 			//its not empty
 			echo "image1: ".$_GET["image1"]."<br>";
@@ -35,6 +36,7 @@
 		
 	}else{
 		//echo "there is no such thing as message";
+		$everything_was_okay = false;
 	}
 	
 	//check if there is variable in the URL
@@ -47,6 +49,7 @@
 		if (empty($_GET ["image2"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 2! ";
+			$everything_was_okay = false;
 		}else{
 			//its not empty
 			echo "image2: ".$_GET["image2"]."<br>";
@@ -54,6 +57,7 @@
 		
 	}else{
 		//echo "there is no such thing as message";
+		$everything_was_okay = false;
 	}
 		//check if there is variable in the URL
 	if (isset ($_GET ["image3"])) {
@@ -65,6 +69,7 @@
 		if (empty($_GET ["image3"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 3 ";
+			$everything_was_okay = false;
 		}else{
 			//its not empty
 			echo "image3: ".$_GET["image3"]."<br>";
@@ -73,6 +78,7 @@
 	}else{
 
 	//echo "there is no such thing as message";
+	$everything_was_okay = false;
 	}
 		//check if there is variable in the URL
 	if (isset ($_GET ["image4"])) {
@@ -84,6 +90,7 @@
 		if (empty($_GET ["image4"])){
 			//it is empty
 			echo " Please insert number of puppies seen on image 4 ";
+			$everything_was_okay = false;
 		}else{
 			//its not empty
 			echo "image4: ".$_GET["image4"]."<br>";
@@ -91,6 +98,7 @@
 		
 	}else{
 		//echo "there is no such thing as message";
+		$everything_was_okay = false;
 	}
 	
 	//Getting the message from the address
